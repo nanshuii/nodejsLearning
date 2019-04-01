@@ -1,4 +1,4 @@
-// 
+// 一个基础的Http服务器
 var http = require('http');
 
 function handle(request, response) {
