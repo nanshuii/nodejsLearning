@@ -4,13 +4,18 @@ var url = require('url');
 
 function start(route, handle) {
     function onRequest(request, response) {
+        var postData = '';
         var pathname = url.parse(request.url).pathname;
         console.log('request received: ' + pathname);
-        // response.writeHead('200', {'Content-Type': 'text/html'});
-        // var content = route(handle, pathname);
-        // response.write(content);
-        // response.end();
-        route(handle, pathname, response); // 以非阻塞操作进行请求相应
+        request.setEncoding('utf8');
+        request.addListener('data', function(postDataChuck) {
+            postData += postDataChuck;
+            console.log('Received Post Data Chuck: ' + postDataChuck);
+        });
+        request.addListener('end', function() {
+            console.log('OnRequest lisened end');
+            route(handle, pathname, response, postData);
+        });
     }
 
     http.createServer(onRequest).listen(8888);
