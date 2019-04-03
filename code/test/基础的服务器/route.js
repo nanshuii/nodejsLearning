@@ -1,8 +1,8 @@
 
-function route(handle, pathname, response, postData) {
+function route(handle, pathname, response, request) {
     console.log('route request pathname = ' + pathname);
     if (typeof handle[pathname] === 'function') {
-        handle[pathname](response, postData);
+        handle[pathname](response, request);
     } else {
         console.log('没有找到适合pathname的方法');
         response.writeHead(404, {'Content-Type': 'text/plain'});
