@@ -8,7 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/code/test/基础的服务器/index.js"
+            // "program": "${workspaceFolder}/code/test/基础的服务器/index.js" 
+            "program": "${workspaceFolder}/code/test/express/bin/www"
         }
     ]
 }
