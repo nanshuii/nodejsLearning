@@ -68,11 +68,15 @@ function start_upload(res) {
 
 function upload(res, req) {
     console.log('Request handler \'upload\'');
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    // res.write('收到了: ' + querystring.parse(postData)['text']);
-    // res.write(req.body);
-    res.write('hi');
-    res.end();
+    var data = '';
+    req.on('data', function (chuck) {
+        data += chuck;
+    });
+    req.on('end', function () {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.write('Received: \n' + querystring.parse(data)['text']);
+        res.end();
+    })
 }
 
 // 收到图片
