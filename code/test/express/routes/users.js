@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-// 一个例子用来
+// 路径优先权的例子
 var users = {'ledon':{
   'name': 'ledon',
   'god': 'is god'
@@ -22,10 +22,6 @@ router.all('/:username', function(req, res, next) { // 检查用户是否存在
 router.get('/:username', function(req, res) {
   // 用户一定存在，直接展示
   res.send(JSON.stringify(users[req.params.username])); 
-});
-
-router.put('/:username', function(req, res) { // 修改用户信息
-  res.send('Done');
 });
 
 
