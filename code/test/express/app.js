@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// var bootstrap = require('bootstrap');
+// var jQuery = require('jQuery');
 
 var indexRouter = require('./routes/index');
 var regRouter = require('./routes/reg');

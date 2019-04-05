@@ -1,7 +1,47 @@
 doctype html
 html
   head
+    meta(charset="utf-8")
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="/stylesheets/bootstrap.css")
+    link(rel="stylesheet", href="/stylesheets/bootstrap-theme.css")
+    link(rel="stylesheet", href="/stylesheets/style.css")
+    style(type="text/css", "body{padding-top:60px;padding-bottom:40px}")
+    script(src="/javascripts/jquery.js")
+    script(src="/javascripts/bootstrap.js")
   body
-    block content
+    nav(class="navbar navbar-inverse navbar-fixed-top" role="navigation")
+      div(class="container-fluid")
+        div(class="navbar-header")
+          button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu") // 对应下面的menu
+            span(class="icon-bar")
+            span(class="icon-bar")
+            span(class="icon-bar")
+          a(href="#" class="navbar-brand")="Ledon Blog"
+        div(class="collapse navbar-collapse" id="menu")
+          ul(class="nav navbar-nav")
+            li(class="active")
+              a(href="#")="首页"
+            li
+              a(href="/login")="登录"
+            li
+              a(href="/reg")="注册"
+            li(class="dropdown")
+              a(href="#" class="dropdown-toggle" data-toggle="dropdown")="下拉菜单"
+                b(class="caret")
+              ul(class="dropdown-menu")
+                li
+                  a(href="#")="下拉菜单1"
+                li(class="divider")
+                li
+                  a(href="#")="下拉菜单2"
+    div(class="container" id="container")
+      block content
+      hr
+      footer
+        p 
+          a="ledon"
+          =" 2019"
+  
+  
+  
