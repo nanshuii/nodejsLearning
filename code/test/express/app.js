@@ -7,13 +7,13 @@ var session = require('express-session');
 var MongoStore = require('connect-mongodb-session')(session);
 var setting = require('./setting');
 var flash = require('connect-flash');
-var db = require('./model/db');
 
 var indexRouter = require('./routes/index');
 var regRouter = require('./routes/reg');
 var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
 var usersRouter = require('./routes/users');
+var postRouter = require('./routes/post');
 var listRouter = require('./routes/list');
 
 var app = express();
@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 var store = new MongoStore({
-  uri: 'mongodb://localhost:27017/ledonblog',
+  uri: setting.url,
   collections: 'myCollection'
 });
  
@@ -63,6 +63,7 @@ app.use('/reg', regRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/users', usersRouter);
+app.use('/post', postRouter);
 app.use('/list', listRouter);
 
 // catch 404 and forward to error handler

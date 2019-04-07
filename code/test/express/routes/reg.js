@@ -49,7 +49,7 @@ router.post('/', (req, res) => {
             }
             req.session.user = new_user;
             req.flash('success', '注册成功');
-             res.redirect('/');
+            res.redirect('/');
         });
     });
 });

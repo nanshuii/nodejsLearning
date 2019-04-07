@@ -1,31 +1,27 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const User = require('../model/user');
+const Post = require('../model/post');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/:user', (req, res) => {
+  User.get(req.params.user, function(err, user) {
+    if (!user) {
+      flash('error', '用户不存在');
+      return res.redirect('/');
+    }
+    console.log('user = ', user);
+    Post.get(user.name, function(err, posts) {
+      if(err) {
+        req.flash('error', err);
+        return res.redirect('/');
+      }
+      console.log('posts = ', posts);
+      res.render('users', {
+        title: user.name,
+        posts: posts
+      });
+    })
+  });
 });
-
-// 路径优先权的例子
-var users = {'ledon':{
-  'name': 'ledon',
-  'god': 'is god'
-}};
-router.all('/:username', function(req, res, next) { // 检查用户是否存在
-  console.log(users[req.params.username]);
-  if (users[req.params.username]) {
-    next(); 
-  } else {
-    next(new Error(req.params.username + ' does not exist.')); }
-});
-
-router.get('/:username', function(req, res) {
-  // 用户一定存在，直接展示
-  res.send(JSON.stringify(users[req.params.username])); 
-});
-
-
-
-
 
 module.exports = router;

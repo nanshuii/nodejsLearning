@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    if (user)
+        p="名字是"+user.name
+        form(action="/post" method="post" class="well form-inline center" style="text-align:center;")
+            input(type="text" class="span8" name="post")
+            button(type="submit" class="btn btn-success")
+                i(class="icon-comment")="发言"
+    each val, index in posts
+        div(class="span4")
+            h2
+                a(href="/users/"+val.user)=val.user+' say:'
+            p
+                small=val.time
+            p=val.post
+        
+
+    
