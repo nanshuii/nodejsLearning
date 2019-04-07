@@ -58,7 +58,11 @@ Post.get = function(username, callback) {
             return callback(err);
         }
         var posts = [];
-        db.collection('posts').find({user: username}).sort({time:-1}).toArray(function(err, docs){
+        var query = {};
+        if (username) {
+            query = {user: username}
+        };
+        db.collection('posts').find(query).sort({time:-1}).toArray(function(err, docs){
             client.close();
             if (err) {
                 callback(err, null);

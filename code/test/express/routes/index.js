@@ -1,13 +1,18 @@
 var express = require('express');
 var router = express.Router();
+var Post = require('../model/post');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-router.get('/hello', (req, res) => {
-  res.send('The time is ' + new Date().toString());
+  Post.get(null, function(err, posts) {
+    if (err) {
+      posts = [];
+    }
+    res.render('index', {
+      title: '首页',
+      posts: posts
+    });
+  });
 });
 
 
