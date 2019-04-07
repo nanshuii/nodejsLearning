@@ -1,4 +1,15 @@
 extends layout
 
 block content
-    h1=title
+    form(class="form-horizational" method="post")
+        fieldset
+            legend="用户登入"
+            div(class="from-group")
+                label(for="username" class="form-label")="用户名"
+                div(class = "input-group")
+                    input(type="text" class="from-input" id="username" name="username")
+            div(class="form-group")
+                label(for="password" class="form-label")="密码"
+                div(class="input-group")
+                    input(type="password" class="form-input" id="password" name="password")
+            button(type="submit" class="btn btn-primary")="登入"
