@@ -7,6 +7,8 @@ var session = require('express-session');
 var MongoStore = require('connect-mongodb-session')(session);
 var setting = require('./setting');
 var flash = require('connect-flash');
+var fs = require('fs');
+var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var regRouter = require('./routes/reg');
@@ -23,11 +25,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 // app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
+// var accessLog = fs.createWriteStream('./access.log', {flags : 'a'});  
+var errorLog = fs.createWriteStream('./error.log', {flags : 'a'});  
+      
+app.use(logger('dev'));     //打印到控制台  
+app.use(logger('combined', {stream : accessLogStream}));      //打印到log日志 
+
 var store = new MongoStore({
   uri: setting.url,
   collections: 'myCollection'
@@ -45,6 +53,7 @@ app.use(session({//session持久化配置
 	resave: false,
   saveUninitialized: true
 }));
+
 
 app.use(flash());
 app.use(function(req,res,next){

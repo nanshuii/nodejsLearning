@@ -9,13 +9,11 @@ router.get('/:user', (req, res) => {
       flash('error', '用户不存在');
       return res.redirect('/');
     }
-    console.log('user = ', user);
     Post.get(user.name, function(err, posts) {
       if(err) {
         req.flash('error', err);
         return res.redirect('/');
       }
-      console.log('posts = ', posts);
       res.render('users', {
         title: user.name,
         posts: posts

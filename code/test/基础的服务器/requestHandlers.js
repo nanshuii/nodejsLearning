@@ -6,8 +6,6 @@ var formidable = require('formidable');
 var util = require('util');
 
 function start(res) {
-    console.log('Request handler \'start\'');
-
     function sleep(milliSeconds) {
         var startTime = new Date().getTime();
         while (new Date().getTime() < startTime + milliSeconds);
@@ -21,7 +19,6 @@ function start(res) {
 
 // 非阻塞操作
 function start_exec(res) {
-    console.log('Request handler \'start_exec\'');
     var content = 'empty';
     exec('ls-lah', function (error, stdout, stderr) {
         res.writeHead(200, {'Content-Type': 'text/plain'});

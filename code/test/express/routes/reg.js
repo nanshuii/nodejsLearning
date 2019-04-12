@@ -12,21 +12,16 @@ router.post('/', (req, res) => {
     const username = req.body['username'];
     const password = req.body['password'];
     const password_repeat = req.body['password-repeat'];
-    console.log(username, password, password_repeat);
     if (username.length == 0 || password.length == 0 || password_repeat.length == 0) {
-        console.log('用户名、密码不能为空');
         req.flash('error', '用户名、密码不能为空');
         return res.redirect('/reg');
     }
     if (password != password_repeat) {
-        console.log('两次密码不一致');
         req.flash('error', '两次密码不一致');
         return res.redirect('/reg');
     }
     const md5 = crypto.createHash('md5');
     const password_md5 = md5.update(password).digest('base64');
-    console.log('password md5 = ', password_md5);
-
     const new_user = new User({
         name: username,
         password: password_md5
@@ -38,7 +33,6 @@ router.post('/', (req, res) => {
             err = '用户名已经存在';
         }
         if (err) {
-            console.log(err);
             req.flash('error', err);
             return res.redirect('/reg');
         }

@@ -18,8 +18,9 @@
     "express-session": "^1.15.6",
     "http-errors": "~1.7.2",
     "jquery": "^3.3.1",
+    "logger": "0.0.1",
     "mongodb": "^3.2.3",
-    "morgan": "~1.9.1",
+    "morgan": "^1.9.1",
     "pug": "~2.0.3"
   }
 }

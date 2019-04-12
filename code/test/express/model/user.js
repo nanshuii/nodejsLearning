@@ -42,7 +42,6 @@ User.get = function get(username, callback) {
             db.collection('users').findOne({name: username}, function(err, doc) {
                 if(err) {
                     client.close();
-                    console.log(err);
                     callback(err, null);
                 }
                 if (doc) {
