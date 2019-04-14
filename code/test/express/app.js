@@ -67,6 +67,7 @@ app.use(function(req,res,next){
   next();
 });
 
+
 app.use('/', indexRouter);
 app.use('/reg', regRouter);
 app.use('/login', loginRouter);
