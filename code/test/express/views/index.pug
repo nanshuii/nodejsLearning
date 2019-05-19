@@ -4,6 +4,15 @@ block content
   div(class="hero-unit")
     h1="欢迎来到 ledon blog"
     p="基于node.js的微博系统"
+  br
+  div(class="user")
+    if (user)
+        a(href="/users/"+user.name)
+            img(src="/images/default-user-image.jpg", alt="default-image", width="50" height="50")
+            p="当前登录用户: "+user.name
+    else
+        p="请登录"
+  br
   each val, index in posts
       div(class="span4")
           h2
